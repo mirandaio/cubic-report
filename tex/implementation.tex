@@ -1,0 +1,6 @@
+\section{Implementation}
+  This new mechanism for creating the p-stream was implemented in ns-2. A 
+  function called create\_cubic\_stream calculates the sending rates of each 
+  packet using equations 15 and 16. Then, the gaps between each packet were
+  calculated by dividing the size of the packet $P$ by the corresponding rate 
+  ${r_k}$.

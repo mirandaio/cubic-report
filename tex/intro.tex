@@ -1,0 +1,32 @@
+\section{Introduction}
+  The current mechanism for creating the probe stream in TCP Rapid increases 
+  the sending rates of the packets in the probe stream exponentially. The
+  mechanism for calculating the sending rates of the packets in a p-stream in 
+  TCP Rapid is given by
+  \begin{IEEEeqnarray}{rCl}
+    r_0 & = & r_{avg} \\
+    r_i & = & m^{i-1}*r_1, \qquad 1 < i < N
+  \end{IEEEeqnarray}
+  where
+  \begin{equation}
+    r_1 = \frac{m^{N-1} - 1}{(N-1)(m-1)m^{N-2}}r_{avg},
+  \end{equation}
+  $r_{avg}$ is the average sending rate of the p-stream, $m$ is the spread 
+  factor, and $N$ is the number of packets in the probe stream.
+  
+  With this mechanism, an exponential range of sending rates is probed.
+  Also, the gaps between the packets are first large and then decrease as more 
+  packets are sent. That is, the granularity is coarser when the first 
+  packets are being sent, and finer when the end of the p-stream is aproached. 
+  This mechanism for assigning the rates of the packets in the p-stream would 
+  work particularly well when the available bandwidth in the bottleneck link 
+  is much larger than $r_{avg}$. This is because the granularity of the 
+  p-stream is finer for packets with rates larger than $r_{avg}$, hence the 
+  estimated available bandwidth can be calculated more accurately. The main 
+  idea of this report is based on the insight provided by CUBIC TCP. It is a 
+  good idea to assume that the new available bandwidth is not very far away 
+  from the previous available bandwidth estimate. In this report, we describe a 
+  mechanism for assigning the sending rates of the packets in the p-stream 
+  so that the granularity is finer when close to the last estimate of the 
+  available bandwidth.
+
